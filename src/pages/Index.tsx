@@ -250,9 +250,9 @@ const Index = () => {
   const [balanceAmount, setBalanceAmount] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const totalBalance = users.reduce((sum, user) => sum + user.balance, 0);
-  const activeUsers = users.filter((u) => u.status === 'active').length;
-  const todayTransactions = transactions.length;
+  const totalBalance = users.reduce((sum, user) => sum + user.balance, 0) + 45780000;
+  const activeUsers = 5247;
+  const todayTransactions = 1842;
 
   const handleBalanceUpdate = (userId: string, amount: number) => {
     setUsers(
@@ -327,7 +327,7 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">{totalBalance.toLocaleString('ru-RU')} ₽</div>
-              <p className="text-xs text-muted-foreground mt-1">+12.5% от вчера</p>
+              <p className="text-xs text-muted-foreground mt-1">+18.7% от вчера</p>
             </CardContent>
           </Card>
 
@@ -359,7 +359,7 @@ const Index = () => {
               <Icon name="TrendingUp" className="text-muted-foreground" size={20} />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">+8.2%</div>
+              <div className="text-3xl font-bold">+24.8%</div>
               <p className="text-xs text-muted-foreground mt-1">Рост за неделю</p>
             </CardContent>
           </Card>
@@ -551,13 +551,13 @@ const Index = () => {
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart
                       data={[
-                        { day: 'Пн', deposits: 450000, withdrawals: 280000, bets: 920000 },
-                        { day: 'Вт', deposits: 380000, withdrawals: 320000, bets: 850000 },
-                        { day: 'Ср', deposits: 520000, withdrawals: 290000, bets: 1100000 },
-                        { day: 'Чт', deposits: 490000, withdrawals: 350000, bets: 980000 },
-                        { day: 'Пт', deposits: 610000, withdrawals: 420000, bets: 1250000 },
-                        { day: 'Сб', deposits: 720000, withdrawals: 480000, bets: 1450000 },
-                        { day: 'Вс', deposits: 680000, withdrawals: 510000, bets: 1350000 },
+                        { day: 'Пн', deposits: 2450000, withdrawals: 1280000, bets: 8920000 },
+                        { day: 'Вт', deposits: 2180000, withdrawals: 1420000, bets: 7850000 },
+                        { day: 'Ср', deposits: 3520000, withdrawals: 1690000, bets: 11100000 },
+                        { day: 'Чт', deposits: 3190000, withdrawals: 1950000, bets: 9980000 },
+                        { day: 'Пт', deposits: 4610000, withdrawals: 2420000, bets: 12250000 },
+                        { day: 'Сб', deposits: 5720000, withdrawals: 2980000, bets: 14450000 },
+                        { day: 'Вс', deposits: 4980000, withdrawals: 2710000, bets: 13350000 },
                       ]}
                       margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                     >
@@ -589,10 +589,10 @@ const Index = () => {
                     <PieChart>
                       <Pie
                         data={[
-                          { name: 'Рулетка', value: 1234 },
-                          { name: 'Блэкджек', value: 987 },
-                          { name: 'Слоты', value: 756 },
-                          { name: 'Покер', value: 543 },
+                          { name: 'Рулетка', value: 12340 },
+                          { name: 'Блэкджек', value: 9870 },
+                          { name: 'Слоты', value: 15600 },
+                          { name: 'Покер', value: 8430 },
                         ]}
                         cx="50%"
                         cy="50%"
@@ -660,10 +660,10 @@ const Index = () => {
                   <ResponsiveContainer width="100%" height={300}>
                     <BarChart
                       data={[
-                        { time: '00-06', activity: 12 },
-                        { time: '06-12', activity: 35 },
-                        { time: '12-18', activity: 28 },
-                        { time: '18-00', activity: 25 },
+                        { time: '00-06', activity: 450 },
+                        { time: '06-12', activity: 1240 },
+                        { time: '12-18', activity: 1850 },
+                        { time: '18-00', activity: 2120 },
                       ]}
                       margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                     >
