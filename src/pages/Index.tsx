@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -47,6 +48,14 @@ interface Transaction {
 const Index = () => {
   const [users, setUsers] = useState<User[]>([
     {
+      id: '333957981',
+      name: 'Gia Real',
+      balance: 250000,
+      email: 'gia.real@casino.com',
+      status: 'active',
+      lastActivity: '1 мин назад',
+    },
+    {
       id: '1',
       name: 'Александр Петров',
       balance: 74000,
@@ -78,11 +87,84 @@ const Index = () => {
       status: 'active',
       lastActivity: '5 мин назад',
     },
+    {
+      id: '5',
+      name: 'Игорь Волков',
+      balance: 156000,
+      email: 'igor@example.com',
+      status: 'active',
+      lastActivity: '3 мин назад',
+    },
+    {
+      id: '6',
+      name: 'Анна Смирнова',
+      balance: 98000,
+      email: 'anna@example.com',
+      status: 'active',
+      lastActivity: '10 мин назад',
+    },
+    {
+      id: '7',
+      name: 'Сергей Новиков',
+      balance: 67000,
+      email: 'sergey@example.com',
+      status: 'inactive',
+      lastActivity: '1 час назад',
+    },
+    {
+      id: '8',
+      name: 'Ольга Павлова',
+      balance: 189000,
+      email: 'olga@example.com',
+      status: 'active',
+      lastActivity: '7 мин назад',
+    },
+    {
+      id: '9',
+      name: 'Максим Федоров',
+      balance: 234000,
+      email: 'maxim@example.com',
+      status: 'active',
+      lastActivity: '4 мин назад',
+    },
+    {
+      id: '10',
+      name: 'Виктория Морозова',
+      balance: 112000,
+      email: 'victoria@example.com',
+      status: 'active',
+      lastActivity: '20 мин назад',
+    },
+    {
+      id: '11',
+      name: 'Артем Соколов',
+      balance: 78000,
+      email: 'artem@example.com',
+      status: 'banned',
+      lastActivity: '3 дня назад',
+    },
+    {
+      id: '12',
+      name: 'Татьяна Лебедева',
+      balance: 145000,
+      email: 'tatiana@example.com',
+      status: 'active',
+      lastActivity: '12 мин назад',
+    },
   ]);
 
   const [transactions] = useState<Transaction[]>([
     {
       id: '1',
+      userId: '333957981',
+      userName: 'Gia Real',
+      type: 'win',
+      amount: 75000,
+      timestamp: '11:20',
+      status: 'completed',
+    },
+    {
+      id: '2',
       userId: '1',
       userName: 'Александр Петров',
       type: 'deposit',
@@ -91,7 +173,7 @@ const Index = () => {
       status: 'completed',
     },
     {
-      id: '2',
+      id: '3',
       userId: '2',
       userName: 'Мария Иванова',
       type: 'win',
@@ -100,7 +182,7 @@ const Index = () => {
       status: 'completed',
     },
     {
-      id: '3',
+      id: '4',
       userId: '3',
       userName: 'Дмитрий Сидоров',
       type: 'bet',
@@ -109,13 +191,58 @@ const Index = () => {
       status: 'completed',
     },
     {
-      id: '4',
+      id: '5',
       userId: '4',
       userName: 'Елена Козлова',
       type: 'withdrawal',
       amount: -10000,
       timestamp: '10:00',
       status: 'pending',
+    },
+    {
+      id: '6',
+      userId: '5',
+      userName: 'Игорь Волков',
+      type: 'deposit',
+      amount: 100000,
+      timestamp: '09:45',
+      status: 'completed',
+    },
+    {
+      id: '7',
+      userId: '333957981',
+      userName: 'Gia Real',
+      type: 'bet',
+      amount: -20000,
+      timestamp: '09:30',
+      status: 'completed',
+    },
+    {
+      id: '8',
+      userId: '8',
+      userName: 'Ольга Павлова',
+      type: 'win',
+      amount: 45000,
+      timestamp: '09:15',
+      status: 'completed',
+    },
+    {
+      id: '9',
+      userId: '9',
+      userName: 'Максим Федоров',
+      type: 'deposit',
+      amount: 80000,
+      timestamp: '09:00',
+      status: 'completed',
+    },
+    {
+      id: '10',
+      userId: '6',
+      userName: 'Анна Смирнова',
+      type: 'bet',
+      amount: -15000,
+      timestamp: '08:45',
+      status: 'completed',
     },
   ]);
 
@@ -414,43 +541,113 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="stats" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <Card className="lg:col-span-2">
+                <CardHeader>
+                  <CardTitle>Динамика транзакций</CardTitle>
+                  <CardDescription>Объем операций за последние 7 дней</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <LineChart
+                      data={[
+                        { day: 'Пн', deposits: 450000, withdrawals: 280000, bets: 920000 },
+                        { day: 'Вт', deposits: 380000, withdrawals: 320000, bets: 850000 },
+                        { day: 'Ср', deposits: 520000, withdrawals: 290000, bets: 1100000 },
+                        { day: 'Чт', deposits: 490000, withdrawals: 350000, bets: 980000 },
+                        { day: 'Пт', deposits: 610000, withdrawals: 420000, bets: 1250000 },
+                        { day: 'Сб', deposits: 720000, withdrawals: 480000, bets: 1450000 },
+                        { day: 'Вс', deposits: 680000, withdrawals: 510000, bets: 1350000 },
+                      ]}
+                      margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                      <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" />
+                      <YAxis stroke="hsl(var(--muted-foreground))" />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px',
+                        }}
+                      />
+                      <Line type="monotone" dataKey="deposits" stroke="#22c55e" strokeWidth={2} />
+                      <Line type="monotone" dataKey="withdrawals" stroke="#ef4444" strokeWidth={2} />
+                      <Line type="monotone" dataKey="bets" stroke="#3b82f6" strokeWidth={2} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Распределение игр</CardTitle>
+                  <CardDescription>По количеству ставок</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={[
+                          { name: 'Рулетка', value: 1234 },
+                          { name: 'Блэкджек', value: 987 },
+                          { name: 'Слоты', value: 756 },
+                          { name: 'Покер', value: 543 },
+                        ]}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        <Cell fill="hsl(var(--primary))" />
+                        <Cell fill="hsl(var(--accent))" />
+                        <Cell fill="#f59e0b" />
+                        <Cell fill="#8b5cf6" />
+                      </Pie>
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px',
+                        }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+            </div>
+
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle>Популярные игры</CardTitle>
-                  <CardDescription>Топ игр по количеству ставок</CardDescription>
+                  <CardTitle>Топ игроков по балансу</CardTitle>
+                  <CardDescription>Самые крупные счета</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Icon name="Dices" size={24} className="text-primary" />
-                      <div>
-                        <p className="font-medium">Рулетка</p>
-                        <p className="text-sm text-muted-foreground">1,234 ставки</p>
-                      </div>
-                    </div>
-                    <Badge>+18%</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Icon name="Spade" size={24} className="text-primary" />
-                      <div>
-                        <p className="font-medium">Блэкджек</p>
-                        <p className="text-sm text-muted-foreground">987 ставок</p>
-                      </div>
-                    </div>
-                    <Badge>+12%</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Icon name="CircleDollarSign" size={24} className="text-primary" />
-                      <div>
-                        <p className="font-medium">Слоты</p>
-                        <p className="text-sm text-muted-foreground">756 ставок</p>
-                      </div>
-                    </div>
-                    <Badge>+8%</Badge>
-                  </div>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart
+                      data={users
+                        .sort((a, b) => b.balance - a.balance)
+                        .slice(0, 6)
+                        .map((u) => ({ name: u.name.split(' ')[0], balance: u.balance }))}
+                      margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                      <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
+                      <YAxis stroke="hsl(var(--muted-foreground))" />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px',
+                        }}
+                      />
+                      <Bar dataKey="balance" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </CardContent>
               </Card>
 
@@ -459,43 +656,30 @@ const Index = () => {
                   <CardTitle>Активность по часам</CardTitle>
                   <CardDescription>Пиковые времена игроков</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">00:00 - 06:00</span>
-                      <span className="font-medium">12%</span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full bg-primary" style={{ width: '12%' }} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">06:00 - 12:00</span>
-                      <span className="font-medium">35%</span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full bg-primary" style={{ width: '35%' }} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">12:00 - 18:00</span>
-                      <span className="font-medium">28%</span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full bg-primary" style={{ width: '28%' }} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">18:00 - 00:00</span>
-                      <span className="font-medium">25%</span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full bg-primary" style={{ width: '25%' }} />
-                    </div>
-                  </div>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart
+                      data={[
+                        { time: '00-06', activity: 12 },
+                        { time: '06-12', activity: 35 },
+                        { time: '12-18', activity: 28 },
+                        { time: '18-00', activity: 25 },
+                      ]}
+                      margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                      <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" />
+                      <YAxis stroke="hsl(var(--muted-foreground))" />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px',
+                        }}
+                      />
+                      <Bar dataKey="activity" fill="hsl(var(--accent))" radius={[8, 8, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </CardContent>
               </Card>
             </div>
