@@ -305,9 +305,14 @@ const Index = () => {
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">Casino Admin</h1>
-            <p className="text-muted-foreground mt-1">Панель управления</p>
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-2xl font-black text-white shadow-lg">
+              M
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold tracking-tight">Mellstroy Casino</h1>
+              <p className="text-muted-foreground mt-1">Админ-панель управления</p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon">
